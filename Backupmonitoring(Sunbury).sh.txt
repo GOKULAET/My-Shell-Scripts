@@ -1,0 +1,29 @@
+#!/bin/bash
+day="$(date -d "-1days" | awk '{print $1}')"
+dm="$(date -d "-1days" | awk '{print $2 $3 }')"
+out="$(echo " ***Below monitoring is for $dm***" 
+echo "*********************************************Sun1 Monitoring*****************************************"
+cd /owprj_backups/OW8SUN1/$day/
+ls -ltr *gz
+echo "********************************************Sun2 Monitoring****************************************"
+cd /owprj_backups/OW8SUN2/$day/
+ls -ltr *gz 
+echo "********************************************Sun3 Monitoring***************************************"
+cd /owprj_backups/OW8SUN3/$day/
+ls -ltr *gz 
+echo "*****************************************Sun4 Monitoring******************************************"
+cd /owprj_backups/OW8SUN4/$day/
+ls -ltr *gz 
+echo "*****************************************Sun8 Monitoring******************************************"
+cd /owprj_backups/OW8SUN8/$day/
+ls -ltr *gz 
+echo "*****Monitoring DONE******")"
+echo "$out"| mail -s "Sunbury Instances Backups Monitoring  for $dm " ganesh.bingimalla@bp.com,shashi.kumar@bp.com -c gokul.raj@bp.com 
+
+
+
+
+
+#######cronjob
+30 8 * * 2-5 /home/lavsnq/backupmonitoring.sh
+### it will send mail to above users at 1PM IST on weekdays except Monday

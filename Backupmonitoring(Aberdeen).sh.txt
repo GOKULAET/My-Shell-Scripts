@@ -1,0 +1,12 @@
+#!/bin/csh
+set day=`date -d "-1days" | awk '{print $1}'`
+set dm=`date -d "-1days" | awk '{print $2 $3}'`
+cd /apps/owbackup/R5008/$day/
+ls -ltr *gz| mail -s "OpenWorks OW8ABZ Project Backups Monitoring for $dm " ganesh.bingimalla@bp.com,shashi.kumar@bp.com -c gokul.raj@bp.com
+
+
+
+crontab -e
+#######cronjob
+35 8 * * 2-5 /home/lavsnq/backupmonitoring.sh
+### it will send mail to above users at 1:05 PM IST on weekdays except Monday
